@@ -1,41 +1,56 @@
 import streamlit as st
-import plotly.express as px
 import pandas as pd
-import numpy as np
+import nltk
+from nltk.corpus import stopwords
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.naive_bayes import MultinomialNB
+from sklearn.pipeline import make_pipeline
+import matplotlib.pyplot as plt
 
-# Generar datos ficticios
-np.random.seed(42)
-dates = pd.date_range(start='2022-01-01', periods=100)
-data1 = np.random.randn(100).cumsum()
-data2 = np.random.randn(100).cumsum()
+# Descargar recursos necesarios de NLTK
+nltk.download('punkt')
+nltk.download('stopwords')
 
-# Crear un dataframe
-df1 = pd.DataFrame({'Date': dates, 'Value': data1, 'Dataset': 'Dataset 1'})
-df2 = pd.DataFrame({'Date': dates, 'Value': data2, 'Dataset': 'Dataset 2'})
-df = pd.concat([df1, df2])
+# Preprocesamiento de texto
+def preprocess_text(text):
+    stop_words = set(stopwords.words('spanish'))
+    words = nltk.word_tokenize(text.lower())
+    return ' '.join([word for word in words if word.isalnum() and word not in stop_words])
 
-# Layout de la aplicación
-st.title('Aplicación de Gráfico de Línea de Tiempo con Streamlit y Plotly')
+# Definir categorías y datos de entrenamiento
+train_data = [
+    ("Nuevo smartphone lanzado al mercado", "Tecnología", "La última versión del smartphone de Apple ha sido lanzada con nuevas características innovadoras."),
+    ("Equipo de fútbol gana el campeonato", "Deportes", "El equipo nacional de fútbol se coronó campeón en un emocionante partido final."),
+    ("Presidente anuncia nuevas medidas económicas", "Política", "El presidente ha anunciado una serie de nuevas políticas destinadas a mejorar la economía."),
+    # (Agregar más datos de entrenamiento aquí)
+]
 
-# Crear dos columnas
-col1, col2 = st.columns(2)
+X_train, y_train, _ = zip(*train_data)
 
-# Columna 1: Gráfico de línea de tiempo
-with col1:
-    st.header('Gráfico de Línea de Tiempo')
-    selected_dataset = st.session_state.get('selected_dataset', 'Dataset 1')
-    filtered_df = df[df['Dataset'] == selected_dataset]
-    fig = px.line(filtered_df, x='Date', y='Value', title=f'Valores de {selected_dataset}')
-    st.plotly_chart(fig)
+# Crear y entrenar el modelo
+model = make_pipeline(TfidfVectorizer(), MultinomialNB())
+model.fit(X_train, y_train)
 
-# Columna 2: Selector de datos y botón de calcular
-with col2:
-    st.header('Selecciona tus Datos')
-    selected_dataset = st.selectbox('Seleccionar Dataset', df['Dataset'].unique())
-    
-    if st.button('Calcular'):
-        st.session_state['selected_dataset'] = selected_dataset
-        st.rerun()
+# Función para categorizar texto
+def categorize_text(text):
+    return model.predict([text])[0]
 
-# Mostrar datos seleccionados
-st.write(f"Datos seleccionados: {selected_dataset}")
+# Aplicación Streamlit
+st.title("Resumen de Categorías de Noticias")
+
+uploaded_file = st.file_uploader("Cargar archivo CSV", type="csv")
+
+if uploaded_file:
+    news_df = pd.read_csv(uploaded_file)
+    news_df['processed_content'] = news_df['content'].apply(preprocess_text)
+
+    if st.button('Generar Resumen'):
+        news_df['category'] = news_df['processed_content'].apply(categorize_text)
+        category_counts = news_df['category'].value_counts()
+
+        st.write(news_df[['title', 'category']])
+
+        st.subheader("Distribución de Categorías")
+        fig, ax = plt.subplots()
+        category_counts.plot(kind='bar', ax=ax)
+        st.pyplot(fig)
