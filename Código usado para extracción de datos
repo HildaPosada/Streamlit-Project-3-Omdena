@@ -1,4 +1,4 @@
-#1) Instalamos la librería necesaria para utilizar la API:
+#1) Instalamos la librería necesaria para utilizar la API: 
 
 # Instalamos la libreria python-dotenv
 # pip install python-dotenv
