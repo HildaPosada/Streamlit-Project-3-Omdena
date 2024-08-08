@@ -1,4 +1,4 @@
-#Utilizando la biblioteca NLTK (Natural Language Toolkit) junto con scikit-learn.
+#Utilizando la biblioteca NLTK (Natural Language Toolkit) junto con scikit-learn. 
 # pip install nltk scikit-learn 
 # No es necesario registrarse para obtener una API key
 
