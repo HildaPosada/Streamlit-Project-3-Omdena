@@ -22,6 +22,8 @@ train_data = [
     ("Nuevo smartphone lanzado al mercado", "Tecnología", "La última versión del smartphone de Apple ha sido lanzada con nuevas características innovadoras."),
     ("Equipo de fútbol gana el campeonato", "Deportes", "El equipo nacional de fútbol se coronó campeón en un emocionante partido final."),
     ("Presidente anuncia nuevas medidas económicas", "Política", "El presidente ha anunciado una serie de nuevas políticas destinadas a mejorar la economía."),
+    ("Estreno de película bate récords de taquilla", "Entretenimiento", "La nueva película de Marvel ha superado todos los récords de taquilla en su primer fin de semana."),
+    ("Bolsa de valores alcanza nuevo máximo histórico", "Economía", "El índice bursátil ha alcanzado un nuevo máximo histórico, impulsado por el crecimiento en el sector tecnológico."),
     # (Agregar más datos de entrenamiento aquí)
 ]
 
