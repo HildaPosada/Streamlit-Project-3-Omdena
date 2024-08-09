@@ -1,0 +1,215 @@
+#1) Instalamos la librería necesaria para utilizar la API: 
+
+# Instalamos la libreria python-dotenv
+# pip install python-dotenv
+import requests
+import pandas as pd
+from datetime import datetime
+import numpy as np
+import matplotlib.pyplot as plt
+from IPython.display import display
+from wordcloud import WordCloud
+import seaborn as sns
+from sklearn.feature_extraction.text import CountVectorizer
+from collections import Counter
+import nltk
+from nltk.sentiment.vader import SentimentIntensityAnalyzer
+from nltk.corpus import stopwords
+
+
+#2) Esta es la API con el filtrado de información necesario, el cual en este caso obtiene información de noticias de tecnología en Colombia de distintas fuentes de información totalmente explicada.
+
+# Tu clave de API de News API
+api_key = '4e47b13c8fc94a98959c497fd318a376'
+
+# URL de la API de News API
+url = 'https://newsapi.org/v2/everything'
+
+# Parámetros para la solicitud
+params = {
+    'apiKey': api_key,
+    'q': 'tecnología AND Colombia',  # Búsqueda precisa por tema y país
+    'language': 'es',
+    'pageSize': 100,  # Máximo permitido por la API por página
+    'sortBy': 'publishedAt'
+}
+
+# Hacer la solicitud GET a la API
+response = requests.get(url, params=params)
+
+# Comprobar el estado de la solicitud
+if response.status_code == 200:
+    # Convertir la respuesta JSON a un diccionario de Python
+    data = response.json()
+    
+    # Crear un DataFrame con los artículos
+    news_df = pd.DataFrame(data['articles'])
+    
+    # Mostrar los primeros 10 registros del DataFrame de manera visual
+    display(news_df.head(10))
+    
+    # Nombre del archivo CSV
+    csv_filename = f'tecnologia_colombia_{datetime.now().strftime("%Y%m%d%H%M%S")}.csv'
+    
+    # Guardar el DataFrame en un archivo CSV
+    news_df.to_csv(csv_filename, index=False, encoding='utf-8')
+    
+    print(f'Datos guardados en {csv_filename}')
+else:
+    print(f'Error: {response.status_code}')
+
+#3) Luego de obtener la data un poco de manipulación:
+
+# Eliminar las columnas 'urlToImage' y 'author' del DataFrame, ya que no se necesitan
+news_df.drop(['urlToImage', 'url'], axis=1, inplace=True)
+display(news_df.head(10))
+# Eliminar las columnas 'urlToImage' y 'author' del DataFrame, ya que no se necesitan
+news_df.drop(['urlToImage', 'url'], axis=1, inplace=True)
+display(news_df.head(10))
+
+#4) Guardar los datos manipulados.
+
+# Nombre del archivo CSV
+csv_filename = f'tecnologia_colombia_manipulada{datetime.now().strftime("%Y%m%d%H%M%S")}.csv'
+    
+    # Guardar el DataFrame en un archivo CSV
+news_df.to_csv(csv_filename, index=False, encoding='utf-8')
+news_df.shape
+
+#5) Un poco de análisis simple sobre la data:
+
+# Información básica del DataFrame
+print("\nInformación básica del DataFrame:")
+print(news_df.info())
+
+# Resumen estadístico
+print("\nResumen estadístico:")
+print(news_df.describe(include='all'))
+
+# Comprobación de valores faltantes
+print("\nValores faltantes por columna:")
+print(news_df.isnull().sum())
+
+#6) Apartado Gráfico.
+# Convertir la columna 'publishedAt' a formato datetime
+news_df['publishedAt'] = pd.to_datetime(news_df['publishedAt'])
+
+# Extraer la fecha de publicación
+news_df['published_date'] = news_df['publishedAt'].dt.date
+
+# Distribución de artículos por fecha de publicación
+plt.figure(figsize=(12, 6))
+news_df['published_date'].value_counts().sort_index().plot(kind='line')
+plt.title('Distribución de artículos por fecha de publicación')
+plt.xlabel('Fecha de publicación')
+plt.ylabel('Cantidad de artículos')
+plt.xticks(rotation=45)
+plt.show()
+
+# Distribución de artículos por día de la semana
+news_df['day_of_week'] = news_df['publishedAt'].dt.day_name()
+plt.figure(figsize=(10, 6))
+sns.countplot(x='day_of_week', data=news_df, order=['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'])
+plt.title('Distribución de artículos por día de la semana')
+plt.xlabel('Día de la semana')
+plt.ylabel('Cantidad de artículos')
+plt.xticks(rotation=45)
+plt.show()
+
+# Distribución de artículos por hora del día
+news_df['hour_of_day'] = news_df['publishedAt'].dt.hour
+plt.figure(figsize=(10, 6))
+sns.countplot(x='hour_of_day', data=news_df)
+plt.title('Distribución de artículos por hora del día')
+plt.xlabel('Hora del día')
+plt.ylabel('Cantidad de artículos')
+plt.show()
+
+
+# Análisis de la longitud del título
+news_df['title_length'] = news_df['title'].apply(lambda x: len(x) if pd.notnull(x) else 0)
+plt.figure(figsize=(10, 6))
+sns.histplot(news_df['title_length'], bins=20, kde=True)
+plt.title('Distribución de la longitud de los títulos')
+plt.xlabel('Longitud del título')
+plt.ylabel('Frecuencia')
+plt.show()
+
+
+# Análisis de la longitud de la descripción
+news_df['description_length'] = news_df['description'].apply(lambda x: len(x) if pd.notnull(x) else 0)
+plt.figure(figsize=(10, 6))
+sns.histplot(news_df['description_length'], bins=20, kde=True)
+plt.title('Distribución de la longitud de las descripciones')
+plt.xlabel('Longitud de la descripción')
+plt.ylabel('Frecuencia')
+plt.show()
+
+
+#7) EDA especializada en análisis de nombres de fuentes.
+
+# Extraer los nombres de las fuentes
+news_df['source_name'] = news_df['source'].apply(lambda x: x['name'] if isinstance(x, dict) else x)
+
+# Distribución de artículos por fuente
+plt.figure(figsize=(12, 8))
+news_df['source_name'].value_counts().plot(kind='bar')
+plt.title('Distribución de artículos por fuente')
+plt.xlabel('Fuente')
+plt.ylabel('Cantidad de artículos')
+plt.xticks(rotation=90)
+plt.show()
+
+# Las 10 fuentes más activas
+top_10_sources = news_df['source_name'].value_counts().head(10)
+plt.figure(figsize=(12, 6))
+sns.barplot(x=top_10_sources.values, y=top_10_sources.index, palette='viridis')
+plt.title('Top 10 Fuentes más Activas')
+plt.xlabel('Cantidad de artículos')
+plt.ylabel('Fuente')
+plt.show()
+
+# Las 10 fuentes más activas
+top_10_sources = news_df['source_name'].value_counts().head(10)
+plt.figure(figsize=(12, 6))
+sns.barplot(x=top_10_sources.values, y=top_10_sources.index, palette='viridis')
+plt.title('Top 10 Fuentes más Activas')
+plt.xlabel('Cantidad de artículos')
+plt.ylabel('Fuente')
+plt.show()
+
+
+# Análisis de frecuencia de palabras
+vectorizer = CountVectorizer(stop_words=stopwords.words('spanish'))
+word_counts = vectorizer.fit_transform(news_df['title'].dropna())
+
+
+
+# Obtener las 20 palabras más comunes
+word_count_df = pd.DataFrame({'word': vectorizer.get_feature_names_out(), 'count': word_counts.sum(axis=0).tolist()[0]})
+word_count_df = word_count_df.sort_values('count', ascending=False).head(20)
+plt.figure(figsize=(10, 6))
+sns.barplot(x='count', y='word', data=word_count_df, palette='viridis')
+plt.title('Top 20 Palabras más Comunes en Títulos')
+plt.xlabel('Frecuencia')
+plt.ylabel('Palabra')
+plt.show()
+
+# Análisis de sentimiento
+
+# Crear el histograma
+n, bins, patches = plt.hist(news_df['sentiment'], bins=20, edgecolor='black', alpha=0.7)
+
+# Definir los colores de las barras según el valor del sentimiento
+for i in range(len(patches)):
+    if bins[i] >= 0:
+        color = plt.cm.RdYlGn((bins[i] - min(bins)) / (max(bins) - min(bins)))
+    else:
+        color = plt.cm.RdYlGn((bins[i] - min(bins)) / (max(bins) - min(bins)))
+    patches[i].set_facecolor(color)
+
+
+plt.title('Distribución de Sentimientos en Descripciones')
+plt.xlabel('Sentimiento')
+plt.ylabel('Frecuencia')
+plt.show()
