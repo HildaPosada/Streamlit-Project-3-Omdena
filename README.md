@@ -4,6 +4,8 @@ Proyecto Final: Desarrollo de un sistema de noticias.
 Análisis de noticias.
 
 By José Enrique, Hilda Posada, Alexa Gloss, Daniel Alvarado
+
+
 Objetivo General:
 
 El objetivo principal de este proyecto es aplicar los fundamentos de ciencia de datos para desarrollar un sistema integral de análisis de noticias para un determinado tema. Se abordarán diferentes etapas, desde la obtención de datos mediante API hasta la implementación de modelos de aprendizaje automático y procesamiento del lenguaje natural, culminando con la creación de una interfaz interactiva utilizando Streamlit y una presentación final frente a los stakeholders objetivo.
