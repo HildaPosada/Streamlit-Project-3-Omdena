@@ -3,7 +3,7 @@ Proyecto Final: Desarrollo de un sistema de noticias.
 
 Análisis de noticias.
 
-By José Enrique, Hilda Posada, Alexa Gloss, Daniel Alvarado
+By José Enrique, Hilda Posada, Daniel Alvarado, Alexa Gloss
 
 
 Objetivo General:
