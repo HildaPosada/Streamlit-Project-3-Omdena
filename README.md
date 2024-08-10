@@ -15,7 +15,7 @@ Vamos a indagar sobre las noticias respecto a tecnología con el fin de entender
 
 # Google colab link 
 https://colab.research.google.com/drive/10WOh4ydRyKezrosZAkAmIg3kn-xRNeSb#scrollTo=_I1IIl8OC0DX
-# link to the medium blog
+# Link to the medium blog
 https://medium.com/@hildaecogreen/9bfb0fe613b5
 
 # How to run the code 
