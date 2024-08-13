@@ -55,7 +55,7 @@ Una vez que la aplicación esté en funcionamiento:
 # Estructura del Proyecto
 
 noticias_categorizadas_20240803131627.csv: Archivo CSV con las noticias categorizadas.
- nombre_del_script.py: Script principal para la ejecución de la aplicación Streamlit.
+nombre_del_script.py: Script principal para la ejecución de la aplicación Streamlit.
 README.md: Este archivo, que contiene instrucciones sobre cómo ejecutar el proyecto.
 
 # Notas Adicionales
