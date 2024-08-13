@@ -1,4 +1,4 @@
-# Streamlit-Project-3-Omdena
+# Proyecto Final: Desarrollo de un sistema de noticias. Análisis de noticias
 Proyecto Final: Desarrollo de un sistema de noticias.
 Análisis de noticias
 
