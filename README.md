@@ -32,6 +32,7 @@ pip install streamlit pandas plotly nltk scikit-learn
 # Paso 1: Descarga los recursos de NLTK
 
 El código hace uso de las bibliotecas de NLTK para el procesamiento de texto. Antes de ejecutar el código, asegúrate de descargar los recursos necesarios:
+
     import nltk
     nltk.download('punkt')
     nltk.download('stopwords')
@@ -41,4 +42,5 @@ El código hace uso de las bibliotecas de NLTK para el procesamiento de texto. A
 Asegúrate de tener el archivo noticias_categorizadas_20240803131627.csv en el mismo directorio que tu script de Python.
 
 Luego, puedes ejecutar la aplicación de Streamlit utilizando el siguiente comando en tu terminal:
+
     streamlit run nombre_del_script.py
