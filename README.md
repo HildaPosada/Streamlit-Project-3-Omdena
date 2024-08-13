@@ -10,14 +10,12 @@ Tema elegido por el equipo:
 Vamos a indagar sobre las noticias respecto a tecnología con el fin de entender cuáles son los diarios más activos de noticias tecnológicas para el ministerio de Tecnologías de Colombia.
 Enlaces Importantes
 
-# Google Colab Link
 [Google Colab Project](https://colab.research.google.com/drive/10WOh4ydRyKezrosZAkAmIg3kn-xRNeSb#scrollTo=_I1IIl8OC0DX)
 
-# Link to the Medium Blog
 [Medium Blog](https://medium.com/@hildaecogreen/9bfb0fe613b5)
 
 
-Cómo ejecutar el código
+# Cómo ejecutar el código
 Requisitos
 
 Asegúrate de tener instalados los siguientes paquetes en tu entorno de trabajo:
@@ -31,16 +29,16 @@ Asegúrate de tener instalados los siguientes paquetes en tu entorno de trabajo:
 Puedes instalar estos paquetes utilizando pip:
 pip install streamlit pandas plotly nltk scikit-learn
 
-Paso 1: Descarga los recursos de NLTK
+# Paso 1: Descarga los recursos de NLTK
 
 El código hace uso de las bibliotecas de NLTK para el procesamiento de texto. Antes de ejecutar el código, asegúrate de descargar los recursos necesarios:
-import nltk
-nltk.download('punkt')
-nltk.download('stopwords')
+    import nltk
+    nltk.download('punkt')
+    nltk.download('stopwords')
 
-Paso 2: Ejecuta la aplicación en Streamlit
+# Paso 2: Ejecuta la aplicación en Streamlit
 
 Asegúrate de tener el archivo noticias_categorizadas_20240803131627.csv en el mismo directorio que tu script de Python.
 
 Luego, puedes ejecutar la aplicación de Streamlit utilizando el siguiente comando en tu terminal:
-streamlit run nombre_del_script.py
+    streamlit run nombre_del_script.py
