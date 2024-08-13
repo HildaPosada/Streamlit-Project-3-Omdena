@@ -9,8 +9,8 @@ Tema elegido por el equipo:
 
 Vamos a indagar sobre las noticias respecto a tecnología con el fin de entender cuáles son los diarios más activos de noticias tecnológicas para el ministerio de Tecnologías de Colombia.
 
-Enlaces Importantes
-[Google Colab Project](https://colab.research.google.com/drive/10WOh4ydRyKezrosZAkAmIg3kn-xRNeSb#scrollTo=_I1IIl8OC0DX)
+Enlaces Importantes:
+[Google Colab Project](https://colab.research.google.com/drive/10WOh4ydRyKezrosZAkAmIg3kn-xRNeSb#scrollTo=_I1IIl8OC0DX),
 [Medium Blog](https://medium.com/@hildaecogreen/9bfb0fe613b5)
 
 
