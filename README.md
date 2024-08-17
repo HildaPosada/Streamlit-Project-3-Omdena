@@ -110,7 +110,7 @@ El archivo resultante `noticias_categorizadas_<timestamp>.csv` contendrá las no
 
 #################### PARTE 3 ################
 
-# Colombian News Categorization App
+# Categorías de títulos en Noticias de Colombia App
 
 Esta aplicación permite categorizar noticias colombianas en tiempo real utilizando técnicas de procesamiento de lenguaje natural y aprendizaje automático. La interfaz está construida con Streamlit y permite a los usuarios interactuar con los datos y visualizar las categorías de las noticias de manera dinámica.
 
