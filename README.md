@@ -172,7 +172,7 @@ La interfaz de la aplicación incluye estilos personalizados en CSS para mejorar
 
 La aplicación genera visualizaciones interactivas y permite a los usuarios explorar las categorías de noticias de una manera dinámica e intuitiva. También proporciona una funcionalidad de categorización de noticias en tiempo real basada en el modelo entrenado.
 
-## Written by
+## Escrito por
 
 Daniel Alvarado, para sugerencias o dificultades contactar: peresdaniel24@gmail.com
 
