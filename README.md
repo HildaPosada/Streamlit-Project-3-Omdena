@@ -4,7 +4,7 @@
 Este proyecto permite obtener y analizar noticias de tecnología en Colombia utilizando la API de News API. El objetivo es extraer, procesar y visualizar datos relevantes sobre el tema.
 
 [Google Colab Project](https://colab.research.google.com/drive/10WOh4ydRyKezrosZAkAmIg3kn-xRNeSb#scrollTo=_I1IIl8OC0DX), 
-[Medium Blog]([https://medium.com/@hildaecogreen/9bfb0fe613b5](https://medium.com/@hildaecogreen/aplicaci%C3%B3n-web-interactiva-para-noticias-de-tecnolog%C3%ADa-en-colombia-utilizando-streamlit-y-nlp-9bfb0fe613b5)).
+[Medium Blog](https://medium.com/@hildaecogreen/9bfb0fe613b5)
 
 # Project Files
 
