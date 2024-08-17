@@ -1,5 +1,5 @@
 
-# Análisis de Noticias de Tecnología en Colombia
+# Análisis de Categorías de títulos en Noticias de Colombia
 
 Este proyecto permite obtener y analizar noticias de tecnología en Colombia utilizando la API de News API. El objetivo es extraer, procesar y visualizar datos relevantes sobre el tema.
 
