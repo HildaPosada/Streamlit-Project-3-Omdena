@@ -61,7 +61,7 @@ st.markdown("""
     """, unsafe_allow_html=True)
 
 # Streamlit app layout
-st.markdown("<h1 style='text-align: center; color: #FFD700;'>Categorías de títulos en Colombia App</h1>", unsafe_allow_html=True)
+st.markdown("<h1 style='text-align: center; color: #FFD700;'>Categorías de títulos en Noticias de Colombia App</h1>", unsafe_allow_html=True)
 
 # Date filtering with slider
 news_df['publishedAt'] = pd.to_datetime(news_df['publishedAt'])
