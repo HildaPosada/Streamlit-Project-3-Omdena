@@ -1,7 +1,6 @@
-
 # Análisis de Categorías de títulos en Noticias de Colombia
 
-Este proyecto permite obtener y analizar Categorías de títulos en Noticias de Colombia utilizando la API de News API. El objetivo es extraer, procesar y visualizar datos relevantes sobre el tema.
+EVamos a investigar las categorías de los títulos de noticias en Colombia para entender cuáles son los diarios más activos, en beneficio del Ministerio de Tecnologías de la Información y las Comunicaciones de Colombia. Comenzaremos con la categoría de tecnología y, durante el entrenamiento del modelo, iremos agregando más categorías.
 
 [Google Colab Project](https://colab.research.google.com/drive/10WOh4ydRyKezrosZAkAmIg3kn-xRNeSb#scrollTo=_I1IIl8OC0DX), 
 [Medium Blog](https://medium.com/@hildaecogreen/9bfb0fe613b5).
